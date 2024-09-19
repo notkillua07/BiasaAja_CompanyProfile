@@ -1,13 +1,12 @@
-package com.example.biasaaja_companyprofile
+package com.example.biasaaja_companyprofile.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
-import androidx.core.view.ViewCompat
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
+import com.example.biasaaja_companyprofile.R
 import com.example.biasaaja_companyprofile.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -20,8 +19,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         navController = (supportFragmentManager.findFragmentById(R.id.hostFragment) as NavHostFragment).navController
-        NavigationUI.setupActionBarWithNavController(this, navController,
-            binding.drawerLayout)
+        NavigationUI.setupActionBarWithNavController(
+            this, navController,
+            binding.drawerLayout
+        )
 
         NavigationUI.setupWithNavController(binding.navView, navController)
         binding.bottomNav.setupWithNavController(navController)
