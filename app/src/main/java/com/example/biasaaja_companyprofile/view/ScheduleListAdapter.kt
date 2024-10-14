@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContentProviderCompat
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.biasaaja_companyprofile.databinding.GamesListItemBinding
 import com.example.biasaaja_companyprofile.databinding.ScheduleListItemBinding
@@ -25,10 +26,6 @@ class ScheduleListAdapter(val scheduleList: ArrayList<Schedule>) :
             LayoutInflater.from(parent.context), parent, false
         )
 
-        binding.cardSchedule.setOnClickListener {
-            Toast.makeText(parent.context, "Detail", Toast.LENGTH_SHORT).show()
-        }
-
         return ScheduleViewHolder(binding)
     }
 
@@ -37,6 +34,17 @@ class ScheduleListAdapter(val scheduleList: ArrayList<Schedule>) :
         holder.binding.txtMonth.text = scheduleList[position].month
         holder.binding.txtName.text = scheduleList[position].name
         holder.binding.txtGameTeam.text = scheduleList[position].game_name + " - " + scheduleList[position].team_name
+
+        holder.binding.cardSchedule.setOnClickListener {
+            val action = ScheduleFragmentDirections.actionScheduleToDetailFragment(
+                scheduleList[position].name.toString() + " - " + scheduleList[position].game_name,
+                scheduleList[position].location.toString() + " (" + scheduleList[position].time.toString() + ")",
+                scheduleList[position].team_name.toString(),
+                scheduleList[position].description.toString(),
+                scheduleList[position].imageUrl.toString()
+            )
+            Navigation.findNavController(it).navigate(action)
+        }
     }
 
     override fun getItemCount(): Int {

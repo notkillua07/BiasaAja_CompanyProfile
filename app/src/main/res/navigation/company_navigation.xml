@@ -50,7 +50,20 @@
         android:id="@+id/schDetailFragment"
         android:name="com.example.biasaaja_companyprofile.view.SchDetailFragment"
         android:label="fragment_sch_detail"
-        tools:layout="@layout/fragment_sch_detail" />
+        tools:layout="@layout/fragment_sch_detail" >
+        <argument
+            android:name="name"
+            app:argType="string" />
+        <argument android:name="location"
+            app:argType="string" />
+        <argument android:name="team"
+            app:argType="string" />
+        <argument android:name="desc"
+            app:argType="string" />
+        <argument
+            android:name="image"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/achievementFragment"
         android:name="com.example.biasaaja_companyprofile.view.AchievementFragment"
