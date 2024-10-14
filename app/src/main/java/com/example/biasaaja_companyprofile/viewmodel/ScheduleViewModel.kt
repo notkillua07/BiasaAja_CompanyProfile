@@ -13,7 +13,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
 class ScheduleViewModel (application: Application) : AndroidViewModel(application) {
-    val LD = MutableLiveData<ArrayList<Schedule>>()
+    val scheduleLD = MutableLiveData<ArrayList<Schedule>>()
     val LoadErrorLD = MutableLiveData<Boolean>()
     val loadingLD = MutableLiveData<Boolean>()
 
@@ -33,7 +33,7 @@ class ScheduleViewModel (application: Application) : AndroidViewModel(applicatio
             Log.d("showvolley", it)
             val type = object : TypeToken<List<Schedule>>() {}.type
             val result = Gson().fromJson<List<Schedule>>(it, type)
-            LD.value = result as ArrayList<Schedule>?
+            scheduleLD.value = result as ArrayList<Schedule>?
             loadingLD.value = false
 
             Log.d("showvolley", result.toString())
