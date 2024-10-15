@@ -13,7 +13,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
 class AchievementViewModel (application: Application) : AndroidViewModel(application) {
-    val LD = MutableLiveData<ArrayList<Achievement>>()
+    val achievementLD = MutableLiveData<ArrayList<Achievement>>()
     val LoadErrorLD = MutableLiveData<Boolean>()
     val loadingLD = MutableLiveData<Boolean>()
 
@@ -33,7 +33,7 @@ class AchievementViewModel (application: Application) : AndroidViewModel(applica
             Log.d("showvolley", it)
             val type = object : TypeToken<List<Achievement>>() {}.type
             val result = Gson().fromJson<List<Achievement>>(it, type)
-            LD.value = result as ArrayList<Achievement>?
+            achievementLD.value = result as ArrayList<Achievement>?
             loadingLD.value = false
 
             Log.d("showvolley", result.toString())

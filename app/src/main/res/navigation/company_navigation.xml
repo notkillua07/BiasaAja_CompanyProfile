@@ -68,7 +68,14 @@
         android:id="@+id/achievementFragment"
         android:name="com.example.biasaaja_companyprofile.view.AchievementFragment"
         android:label="fragment_achievement"
-        tools:layout="@layout/fragment_achievement" />
+        tools:layout="@layout/fragment_achievement" >
+        <argument
+            android:name="game"
+            app:argType="string" />
+        <argument
+            android:name="image"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/TMembersFragment"
         android:name="com.example.biasaaja_companyprofile.view.TMembersFragment"

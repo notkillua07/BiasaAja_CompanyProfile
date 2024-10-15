@@ -55,6 +55,11 @@ class GamesListAdapter(val gamesList: ArrayList<Game>) :
 //                Navigation.findNavController(it).navigate(action)
 //            }
 
+            holder.binding.btnAchievements.setOnClickListener {
+                val action = WhatWePlayFragmentDirections.actionWhatWePlayToAchievementFragment(
+                    gamesList[position].name.toString(), gamesList[position].imageUrl.toString())
+                Navigation.findNavController(it).navigate(action)
+            }
         }
 
         override fun getItemCount(): Int {
