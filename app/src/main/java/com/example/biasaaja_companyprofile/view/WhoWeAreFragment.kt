@@ -22,4 +22,12 @@ class WhoWeAreFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.btnLike.setOnClickListener {
+            val currentLikes = binding.btnLike.text.toString().toInt()
+            binding.btnLike.text = (currentLikes + 1).toString()
+        }
+    }
+
 }
