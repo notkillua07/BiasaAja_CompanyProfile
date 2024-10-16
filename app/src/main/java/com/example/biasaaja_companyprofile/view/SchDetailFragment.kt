@@ -1,11 +1,13 @@
 package com.example.biasaaja_companyprofile.view
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.biasaaja_companyprofile.R
 import com.example.biasaaja_companyprofile.databinding.FragmentSchDetailBinding
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
@@ -57,6 +59,25 @@ class SchDetailFragment : Fragment() {
         binding.txtLocation.text = location
         binding.txtTeam.text = team
         binding.txtDes.text = desc
-    }
 
+        binding.btnNotif.setOnClickListener {
+            val builder = AlertDialog.Builder(requireContext())
+            builder.setTitle("Notification created.")
+            builder.setMessage("Would you like to proceed?")
+
+            builder.setPositiveButton("Yes") { dialog, which ->
+                MainActivity.showNotification(
+                    name.toString(), "You will get a notification about this event",
+                    R.drawable.ic_launcher_foreground
+                )
+            }
+
+            builder.setNegativeButton("Cancel") { dialog, which ->
+                dialog.dismiss()
+            }
+
+            val dialog = builder.create()
+            dialog.show()
+        }
+    }
 }
