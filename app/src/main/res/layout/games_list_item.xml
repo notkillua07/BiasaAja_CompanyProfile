@@ -24,7 +24,7 @@
             <ProgressBar
                 android:id="@+id/progressBar"
                 style="?android:attr/progressBarStyle"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="@+id/imgGame"
                 app:layout_constraintEnd_toEndOf="@id/imgGame"
@@ -33,7 +33,7 @@
 
             <ImageView
                 android:id="@+id/imgGame"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="125dp"
                 android:scaleType="centerCrop"
                 app:layout_constraintEnd_toEndOf="parent"
