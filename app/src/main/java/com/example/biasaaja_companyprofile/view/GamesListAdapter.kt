@@ -25,6 +25,35 @@ class GamesListAdapter(val gamesList: ArrayList<Game>) :
 
         }
 
+        //List Games:
+    //[{
+    // "id":1,
+    // "name":"Mobile Legends",
+    // "imageUrl":"https://picsum.photos/id/237/200/300",
+    // "description":"A multiplayer online battle arena (MOBA) game for mobile devices,
+    // where two teams battle to destroy each other's base."},
+    // {
+    // "id":2,
+    // "name":"Valorant",
+    // "imageUrl":"https://example.com/images/valorant.jpg",
+    // "description":"A tactical first-person shooter (FPS) game where
+    // teams of five compete in objective-based rounds."},
+    // {
+    // "id":3,
+    // "name":"Dota 2",
+    // "imageUrl":"https://example.com/images/dota2.jpg",
+    // "description":"A MOBA game where two teams of five players attempt to destroy
+    // the enemy's ancient."},
+    // {"id":4,
+    // "name":"Counter-Strike: Global Offensive",
+    // "imageUrl":"https://example.com/images/csgo.jpg",
+    // "description":"A competitive FPS game where teams of terrorists and counter-terrorists
+    // face off in various game modes."},
+    // {"id":5,
+    // "name":"League of Legends",
+    // "imageUrl":"https://example.com/images/league_of_legends.jpg",
+    // "description":"A popular MOBA game where teams battle to destroy the opposing team's Nexus."}]
+
         override fun onBindViewHolder(holder: GamesViewHolder, position: Int) {
             val picasso = Picasso.Builder(holder.itemView.context)
             picasso.listener { picasso, uri, exception ->
@@ -58,6 +87,12 @@ class GamesListAdapter(val gamesList: ArrayList<Game>) :
             holder.binding.btnAchievements.setOnClickListener {
                 val action = WhatWePlayFragmentDirections.actionWhatWePlayToAchievementFragment(
                     gamesList[position].name.toString(), gamesList[position].imageUrl.toString())
+                Navigation.findNavController(it).navigate(action)
+            }
+
+            holder.binding.btnTeams.setOnClickListener {
+                val game = gamesList[holder.adapterPosition]
+                val action = WhatWePlayFragmentDirections.actionWhatWePlayToTeamsFragment(game)
                 Navigation.findNavController(it).navigate(action)
             }
         }

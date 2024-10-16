@@ -29,3 +29,18 @@ data class Schedule(
     val game_name:String?,
     val team_name:String?,
 ):Serializable
+
+data class Team(
+    val id:Int?,
+    val name:String?,
+    val game:Game?,
+    val members:ArrayList<Member>?
+):Serializable
+
+data class Member(
+    val id:Int?,
+    val name:String?,
+//    val bod:String?,
+//    val phone:String?,
+    val imageUrl:String?
+):Serializable
