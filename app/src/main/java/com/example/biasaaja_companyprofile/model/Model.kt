@@ -40,6 +40,7 @@ data class Team(
 data class Member(
     val id:Int?,
     val name:String?,
+    val role:String?,
 //    val bod:String?,
 //    val phone:String?,
     val imageUrl:String?

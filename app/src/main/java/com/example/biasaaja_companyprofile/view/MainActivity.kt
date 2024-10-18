@@ -38,6 +38,8 @@ class MainActivity : AppCompatActivity() {
                     setAutoCancel(true)
                 }
 
+
+
             val notificationManager =
                 NotificationManagerCompat.from(instance!!.applicationContext)
 
