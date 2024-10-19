@@ -12,7 +12,9 @@ import com.example.biasaaja_companyprofile.model.Game
 import com.example.biasaaja_companyprofile.model.Member
 import com.example.biasaaja_companyprofile.model.Team
 import com.example.biasaaja_companyprofile.util.TeamDataProvider
+import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
+import java.lang.Exception
 import java.util.stream.Collectors.toCollection
 
 
@@ -26,13 +28,32 @@ class TeamsFragment : Fragment() {
 
         if (arguments != null) {
             game = TeamsFragmentArgs.fromBundle(requireArguments()).game
-            context?.let { ctx ->
-                val picasso = Picasso.Builder(ctx)
-                picasso.listener { _, _, exception ->
-                    exception.printStackTrace()
-                }
-                picasso.build().load(game.imageUrl).into(binding.gameImg)
+//            context?.let { ctx ->
+//                val picasso = Picasso.Builder(ctx)
+//                picasso.listener { _, _, exception ->
+//                    exception.printStackTrace()
+//                }
+//                picasso.build().load(game.imageUrl).into(binding.gameImg)
+//            }
+
+            val picasso = Picasso.Builder(view.context)
+            picasso.listener { picasso, uri, exception ->
+                exception.printStackTrace()
             }
+            picasso.build().load(game.imageUrl).into(binding.gameImg)
+            object: Callback {
+                override fun onSuccess() {
+                    binding.loadingBar.visibility = View.INVISIBLE
+                    binding.gameImg.visibility = View.VISIBLE
+
+                }
+
+                override fun onError(e: Exception?) {
+                    Log.e("picasso_error", e.toString())
+                }
+
+            }
+
             Log.d("TeamsFragment", "Game ID: ${game.id}")
         }
         val teamsList = TeamDataProvider.teams.filter { it.game!!.id == game.id }

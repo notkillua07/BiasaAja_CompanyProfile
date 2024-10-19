@@ -48,6 +48,7 @@ class AchievementFragment : Fragment() {
         picasso.build().load(image)
             .into(binding.imgGame, object: Callback {
                 override fun onSuccess() {
+                    binding.progressBar4.visibility = View.INVISIBLE
                     binding.imgGame.visibility = View.VISIBLE
                 }
 
