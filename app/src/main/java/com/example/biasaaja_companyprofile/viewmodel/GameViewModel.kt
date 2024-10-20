@@ -27,7 +27,7 @@ class GameViewModel (application: Application) : AndroidViewModel(application) {
         loadingLD.value = true
 
         queue = Volley.newRequestQueue(getApplication())
-        val url = "https://www.jsonkeeper.com/b/DQYR"
+        val url = "https://www.jsonkeeper.com/b/UF73"
 
         val stringRequest = StringRequest(Request.Method.GET, url, {
             loadingLD.value = false

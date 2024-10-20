@@ -26,7 +26,7 @@ class ScheduleViewModel (application: Application) : AndroidViewModel(applicatio
         loadingLD.value = true
 
         queue = Volley.newRequestQueue(getApplication())
-        val url = "https://www.jsonkeeper.com/b/NHUL"
+        val url = "https://www.jsonkeeper.com/b/6QWF"
 
         val stringRequest = StringRequest(Request.Method.GET, url, {
             loadingLD.value = false
