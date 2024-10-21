@@ -5,13 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.biasaaja_companyprofile.R
 import com.example.biasaaja_companyprofile.databinding.FragmentWhoWeAreBinding
+import com.squareup.picasso.Picasso
 
-/**
- * A simple [Fragment] subclass.
- * Use the [WhoWeAreFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+
 class WhoWeAreFragment : Fragment() {
     private lateinit var binding: FragmentWhoWeAreBinding
     override fun onCreateView(
@@ -24,6 +22,8 @@ class WhoWeAreFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.imgBanner.setImageResource(R.drawable.pic)
+        binding.imgBanner.visibility = View.VISIBLE
         binding.btnLike.setOnClickListener {
             val currentLikes = binding.btnLike.text.toString().toInt()
             binding.btnLike.text = (currentLikes + 1).toString()

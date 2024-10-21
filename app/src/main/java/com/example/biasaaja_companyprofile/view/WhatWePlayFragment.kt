@@ -48,9 +48,6 @@ class WhatWePlayFragment : Fragment() {
             viewModel.refresh()
             binding.refreshLayout.isRefreshing = false
         }
-
-
-
     }
 
     fun observeViewModel() {
