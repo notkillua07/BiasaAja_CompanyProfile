@@ -12,12 +12,12 @@ object TeamDataProvider {
             game = Game(
                 1,
                 "Mobile Legends",
-                "https://picsum.photos/id/237/200/300",
+                "https://assets-prd.ignimgs.com/2023/09/30/mobilelegends-1696089976653.jpg",
                 "A multiplayer online battle arena (MOBA) game for mobile devices, where two teams battle to destroy each other's base."
             ),
             members = arrayListOf(
-                Member(1, "Alice","Jungler", "https://picsum.photos/200/300"),
-                Member(2, "Bob","Roamer", "https://picsum.photos/200/301")
+                Member(1, "Alice","Jungler", "https://avatar.iran.liara.run/public/girl"),
+                Member(2, "Bob","Roamer", "https://avatar.iran.liara.run/public/boy")
             )
         ),
         Team(
@@ -26,13 +26,13 @@ object TeamDataProvider {
             game = Game(
                 1,
                 "Mobile Legends",
-                "https://picsum.photos/id/237/200/300",
+                "https://assets-prd.ignimgs.com/2023/09/30/mobilelegends-1696089976653.jpg",
                 "A multiplayer online battle arena (MOBA) game for mobile devices, where two teams battle to destroy each other's base."
             ),
             members = arrayListOf(
-                Member(3, "Charlie","Jungler", "https://picsum.photos/200/302"),
-                Member(4, "Dave","Gold Laner", "https://picsum.photos/200/303"),
-                Member(5, "Eve","Top Laner", "https://picsum.photos/200/304")
+                Member(3, "Charlie","Jungler", "https://avatar.iran.liara.run/public/boy"),
+                Member(4, "Dave","Gold Laner", "https://avatar.iran.liara.run/public/boy"),
+                Member(5, "Eve","Top Laner", "https://avatar.iran.liara.run/public/girl")
             )
         ),
         Team(
@@ -41,15 +41,15 @@ object TeamDataProvider {
             game = Game(
                 2,
                 "Valorant",
-                "https://example.com/images/valorant.jpg",
+                "https://www.riotgames.com/darkroom/1440/d0807e131a84f2e42c7a303bda672789:3d02afa7e0bfb75f645d97467765b24c/valorant-offwhitelaunch-keyart.jpg",
                 "A tactical first-person shooter (FPS) game where teams of five compete in objective-based rounds."
             ),
             members = arrayListOf(
-                Member(6, "Zack","Duelist","https://picsum.photos/200/305"),
-                Member(7, "Tyson", "Controller", "https://picsum.photos/200/306"),
-                Member(21, "Gustavo", "Initiator","https://picsum.photos/200/305"),
-                Member(22, "Jordan", "Sentinel", "https://picsum.photos/200/306"),
-                Member(23, "John","IGL", "https://picsum.photos/200/305")
+                Member(6, "Zachary","Duelist","https://cloud.papercrowns.com/image/upload/c_fill,g_face,w_768,h_768,q_auto/v1/sentinels/member/zekken.jpg?v=65af19b0cdc94"),
+                Member(7, "Tyson", "Controller", "https://cloud.papercrowns.com/image/upload/c_fill,g_face,w_768,h_768,q_auto/v1/sentinels/member/tenz.jpg?v=65af19ceef35d"),
+                Member(21, "Gustavo", "Initiator","https://cloud.papercrowns.com/image/upload/c_fill,g_face,w_768,h_768,q_auto/v1/sentinels/member/sacy.jpg"),
+                Member(22, "Jordan", "Sentinel", "https://cloud.papercrowns.com/image/upload/c_fill,g_face,w_768,h_768,q_auto/v1/sentinels/member/zellsis.jpg?v=65af18c2aa8e6"),
+                Member(23, "John","IGL", "https://cloud.papercrowns.com/image/upload/c_fill,g_face,w_768,h_768,q_auto/v1/sentinels/member/johnqt.jpg?v=65af1970ad174")
             )
         ),
         Team(
@@ -58,11 +58,11 @@ object TeamDataProvider {
             game = Game(
                 2,
                 "Valorant",
-                "https://example.com/images/valorant.jpg",
+                "https://www.riotgames.com/darkroom/1440/d0807e131a84f2e42c7a303bda672789:3d02afa7e0bfb75f645d97467765b24c/valorant-offwhitelaunch-keyart.jpg",
                 "A tactical first-person shooter (FPS) game where teams of five compete in objective-based rounds."
             ),
             members = arrayListOf(
-                Member(8, "Charlie","Soloist", "https://picsum.photos/200/307")
+                Member(8, "Charlie","Soloist", "https://avatar.iran.liara.run/public/boy")
             )
         ),
         Team(
@@ -71,13 +71,13 @@ object TeamDataProvider {
             game = Game(
                 3,
                 "Dota 2",
-                "https://example.com/images/dota2.jpg",
+                "https://cdn.akamai.steamstatic.com/apps/dota2/images/dota2_social.jpg",
                 "A MOBA game where two teams of five players attempt to destroy the enemy's ancient."
             ),
             members = arrayListOf(
-                Member(9, "Alice","Gold Laner", "https://picsum.photos/200/308"),
-                Member(10, "Bob", "Jungler", "https://picsum.photos/200/309"),
-                Member(11, "Charlie","Top Laner", "https://picsum.photos/200/310")
+                Member(9, "Alice","Gold Laner", "https://avatar.iran.liara.run/public/girl"),
+                Member(10, "Bob", "Jungler", "https://avatar.iran.liara.run/public/boy"),
+                Member(11, "Charlie","Top Laner", "https://avatar.iran.liara.run/public/boy")
             )
         ),
         Team(
@@ -86,12 +86,12 @@ object TeamDataProvider {
             game = Game(
                 3,
                 "Dota 2",
-                "https://example.com/images/dota2.jpg",
+                "https://cdn.akamai.steamstatic.com/apps/dota2/images/dota2_social.jpg",
                 "A MOBA game where two teams of five players attempt to destroy the enemy's ancient."
             ),
             members = arrayListOf(
-                Member(12, "Dave","Jungler", "https://picsum.photos/200/311"),
-                Member(13, "Eve", "Roamer","https://picsum.photos/200/312")
+                Member(12, "Dave","Jungler", "https://avatar.iran.liara.run/public/boy"),
+                Member(13, "Eve", "Roamer","https://avatar.iran.liara.run/public/girl")
             )
         ),
         Team(
@@ -100,13 +100,13 @@ object TeamDataProvider {
             game = Game(
                 4,
                 "Counter-Strike: Global Offensive",
-                "https://example.com/images/csgo.jpg",
+                "https://cdn.akamai.steamstatic.com/steam/apps/730/header.jpg",
                 "A competitive FPS game where teams of terrorists and counter-terrorists face off in various game modes."
             ),
             members = arrayListOf(
-                Member(14, "Alice", "AWP-er","https://picsum.photos/200/313"),
-                Member(15, "Bob", "Support","https://picsum.photos/200/314"),
-                Member(16, "Charlie","Flank", "https://picsum.photos/200/315")
+                Member(14, "Alice", "AWP-er","https://avatar.iran.liara.run/public/girl"),
+                Member(15, "Bob", "Support","https://avatar.iran.liara.run/public/boy"),
+                Member(16, "Charlie","Flank", "https://avatar.iran.liara.run/public/boy")
             )
         ),
         Team(
@@ -115,12 +115,12 @@ object TeamDataProvider {
             game = Game(
                 5,
                 "League of Legends",
-                "https://example.com/images/league_of_legends.jpg",
+                "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ahri_0.jpg",
                 "A popular MOBA game where teams battle to destroy the opposing team's Nexus."
             ),
             members = arrayListOf(
-                Member(17, "Dave", "Jungler","https://picsum.photos/200/316"),
-                Member(18, "Eve", "Roamer","https://picsum.photos/200/317")
+                Member(17, "Dave", "Jungler","https://avatar.iran.liara.run/public/boy"),
+                Member(18, "Eve", "Roamer","https://avatar.iran.liara.run/public/girl")
             )
         ),
         Team(
@@ -129,12 +129,12 @@ object TeamDataProvider {
             game = Game(
                 5,
                 "League of Legends",
-                "https://example.com/images/league_of_legends.jpg",
+                "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ahri_0.jpg",
                 "A popular MOBA game where teams battle to destroy the opposing team's Nexus."
             ),
             members = arrayListOf(
-                Member(19, "Alice", "Jungler","https://picsum.photos/200/318"),
-                Member(20, "Bob", "Roamer","https://picsum.photos/200/319")
+                Member(19, "Alice", "Jungler","https://avatar.iran.liara.run/public/girl"),
+                Member(20, "Bob", "Roamer","https://avatar.iran.liara.run/public/boy")
             )
         )
     )
