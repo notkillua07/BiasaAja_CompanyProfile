@@ -64,10 +64,12 @@ class AchievementFragment : Fragment() {
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, years)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerYear.adapter = adapter
+        binding.spinnerYear.setSelection(0)
 
         viewModel.achievementLD.observe(viewLifecycleOwner, Observer { achievements ->
-            loadAchievements(gameName!!, "All", achievements)
+            loadAchievements(gameName!!, binding.spinnerYear.selectedItem.toString(), achievements)
         })
+
 
         binding.spinnerYear.onItemSelectedListener = object : android.widget.AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: android.widget.AdapterView<*>?) {}
