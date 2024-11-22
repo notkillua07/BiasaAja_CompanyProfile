@@ -4,6 +4,7 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
+import com.example.biasaaja_companyprofile.model.UserDatabase
 
 fun createNotificationChannel(context: Context, importance: Int,
                               showBadge: Boolean, name: String, description: String) {
@@ -18,4 +19,12 @@ fun createNotificationChannel(context: Context, importance: Int,
         notificationManager.createNotificationChannel(channel)
 
     }
+}
+
+//Database
+val DB_NAME = "companyprofile"
+
+fun buildDb(context: Context): UserDatabase {
+    val db = UserDatabase.buildDatabase(context)
+    return db
 }

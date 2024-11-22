@@ -1,5 +1,8 @@
 package com.example.biasaaja_companyprofile.model
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.io.Serializable
 
 data class Game(
@@ -44,4 +47,12 @@ data class Member(
 //    val bod:String?,
 //    val phone:String?,
     val imageUrl:String?
+):Serializable
+
+@Entity(tableName = "users")
+data class User(
+    var firstname: String,
+    var lastname: String,
+    @PrimaryKey var username: String,
+    var password: String
 ):Serializable
