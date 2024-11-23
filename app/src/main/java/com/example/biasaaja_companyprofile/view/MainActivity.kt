@@ -12,13 +12,19 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.biasaaja_companyprofile.R
 import com.example.biasaaja_companyprofile.databinding.ActivityMainBinding
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.util.Log
+import android.view.MenuItem
+import androidx.core.view.GravityCompat
+import androidx.navigation.Navigation
+import com.example.biasaaja_companyprofile.util.SessionManager
 import com.example.studentproject.util.createNotificationChannel
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
+    private lateinit var sessionManager: SessionManager
     init {
         instance = this
     }
@@ -63,6 +69,14 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        sessionManager = SessionManager(this)
+
+        if (!sessionManager.isLoggedIn()) {
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
         navController = (supportFragmentManager.findFragmentById(R.id.hostFragment) as NavHostFragment).navController
         NavigationUI.setupActionBarWithNavController(
             this, navController,
@@ -72,6 +86,37 @@ class MainActivity : AppCompatActivity() {
         NavigationUI.setupWithNavController(binding.navView, navController)
         binding.bottomNav.setupWithNavController(navController)
 
+        updateWelcomeMessage()
+
+        binding.navView.setNavigationItemSelectedListener { menuItem ->
+            handleMenuClick(menuItem)
+        }
+
+    }
+
+    private fun updateWelcomeMessage() {
+        val menu = binding.navView.menu
+        val welcomeItem = menu.findItem(R.id.itemName)
+        val firstName = sessionManager.getFirstName() ?: "Guest"
+        val lastName = sessionManager.getLastName() ?: ""
+        welcomeItem.title = "Welcome, $firstName $lastName"
+    }
+
+    private fun handleMenuClick(menuItem: MenuItem): Boolean {
+        when (menuItem.itemId) {
+            R.id.itemApply -> {
+                // Apply Team
+            }
+            R.id.itemSignOut -> {
+                // Clear session and navigate to login
+                sessionManager.clearSession()
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+        }
+        binding.drawerLayout.closeDrawer(GravityCompat.START) // Close the drawer
+        return true
     }
 
     override fun onSupportNavigateUp(): Boolean {

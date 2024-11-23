@@ -24,7 +24,7 @@ class UserViewModel(application: Application) : AndroidViewModel(application), C
             val user = db.userDao().selectUser(username)
             if (user != null && user.password == password) {
                 // Login successful, save session
-                sessionManager.saveLoginState(username)
+                sessionManager.saveLoginState(username, user.firstname, user.lastname)
                 loginStatus.postValue(true)
             } else {
                 loginStatus.postValue(false) // Login failed
