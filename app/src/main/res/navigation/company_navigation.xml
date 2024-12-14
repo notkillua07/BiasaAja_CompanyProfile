@@ -19,6 +19,9 @@
         <action
             android:id="@+id/actionHomeToScheduleFragment"
             app:destination="@id/itemSchedule" />
+        <action
+            android:id="@+id/actionHomeToApplyTeamFragment"
+            app:destination="@id/applyTeamFragment" />
     </fragment>
     <fragment
         android:id="@+id/itemWePlay"
@@ -96,5 +99,24 @@
         <argument
             android:name="game"
             app:argType="com.example.biasaaja_companyprofile.model.Game" />
+    </fragment>
+    <fragment
+        android:id="@+id/applyTeamFragment"
+        android:name="com.example.biasaaja_companyprofile.view.ApplyTeamFragment"
+        android:label="ApplyTeamFragment" >
+        <action
+            android:id="@+id/actionApplyTeamToApplyTeamNewFragment"
+            app:destination="@id/applyTeamNewFragment" />
+        <argument
+            android:name="username"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/applyTeamNewFragment"
+        android:name="com.example.biasaaja_companyprofile.view.ApplyTeamNewFragment"
+        android:label="ApplyTeamNewFragment" >
+        <argument
+            android:name="username"
+            app:argType="string" />
     </fragment>
 </navigation>

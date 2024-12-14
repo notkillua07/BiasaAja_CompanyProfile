@@ -4,7 +4,6 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.StringRequest
@@ -13,15 +12,22 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.example.biasaaja_companyprofile.model.Game
 
-class GameViewModel (application: Application) : AndroidViewModel(application) {
+class GameViewModel(application: Application) : AndroidViewModel(application) {
     val gamesLD = MutableLiveData<ArrayList<Game>>()
+    val allGamesLD = MutableLiveData<ArrayList<String>>()  // List of game names
+    val selectedGameIdLD = MutableLiveData<Int?>()  // Holds the selected game ID
     val gamesLoadErrorLD = MutableLiveData<Boolean>()
     val loadingLD = MutableLiveData<Boolean>()
 
-    val TAG = "volleyTag"
     private var queue: RequestQueue? = null
 
+    val TAG = "volleyTag"
 
+    init {
+        refresh()
+    }
+
+    // Function to fetch game data from the URL
     fun refresh() {
         gamesLoadErrorLD.value = false
         loadingLD.value = true
@@ -30,32 +36,33 @@ class GameViewModel (application: Application) : AndroidViewModel(application) {
         val url = "https://www.jsonkeeper.com/b/UF73"
 
         val stringRequest = StringRequest(Request.Method.GET, url, {
-            loadingLD.value = false
-            Log.d("showvolley", it)
             val type = object : TypeToken<List<Game>>() {}.type
             val result = Gson().fromJson<List<Game>>(it, type)
-            gamesLD.value = result as ArrayList<Game>?
+
+            val gameNames = result.map { it.name ?: "Unknown" }
+            allGamesLD.value = ArrayList(gameNames)
+
+            gamesLD.value = ArrayList(result)
             loadingLD.value = false
 
             Log.d("showvolley", result.toString())
 
         }, {
-            Log.d("showvolley", it.toString())
             gamesLoadErrorLD.value = true
             loadingLD.value = false
         })
 
         stringRequest.tag = TAG
         queue?.add(stringRequest)
+    }
 
-
+    // Function to set the selected game ID and trigger necessary actions
+    fun setSelectedGameId(gameId: Int) {
+        selectedGameIdLD.value = gameId
     }
 
     override fun onCleared() {
         super.onCleared()
         queue?.cancelAll(TAG)
     }
-
-
-
 }

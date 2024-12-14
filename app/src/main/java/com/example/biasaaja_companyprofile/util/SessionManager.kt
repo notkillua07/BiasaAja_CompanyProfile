@@ -25,6 +25,10 @@ class SessionManager(context: Context) {
         return preferences.getString("last_name", null)
     }
 
+    fun getUsername(): String?{
+        return preferences.getString("username", null)
+    }
+
     fun clearSession() { // Clear the login state and username
         preferences.edit().clear().apply()
     }

@@ -9,3 +9,8 @@ interface LoginClickListener {
 interface RegisterClickListener {
     fun onRegisterClick(v: View)
 }
+
+interface StoreApplyClickListener{
+    fun onStoreApplyClick(v: View)
+}
+

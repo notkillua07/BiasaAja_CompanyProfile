@@ -56,3 +56,12 @@ data class User(
     @PrimaryKey var username: String,
     var password: String
 ):Serializable
+
+@Entity(tableName = "applies", primaryKeys = ["username", "team"])
+data class Apply(
+    val username: String,
+    val team: Int,
+    var reason: String,
+    var status: String
+): Serializable
+

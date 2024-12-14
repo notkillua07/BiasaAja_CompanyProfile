@@ -5,7 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.example.biasaaja_companyprofile.model.User
 import com.example.biasaaja_companyprofile.util.SessionManager
-import com.example.studentproject.util.buildDb
+import com.example.studentproject.util.buildCompanyProfileDb
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -20,7 +20,7 @@ class UserViewModel(application: Application) : AndroidViewModel(application), C
 
     fun login(username: String, password: String) {
         launch {
-            val db = buildDb(getApplication())
+            val db = buildCompanyProfileDb(getApplication())
             val user = db.userDao().selectUser(username)
             if (user != null && user.password == password) {
                 // Login successful, save session
@@ -40,7 +40,7 @@ class UserViewModel(application: Application) : AndroidViewModel(application), C
         }
 
         launch {
-            val db = buildDb(getApplication())
+            val db = buildCompanyProfileDb(getApplication())
             val existingUser = db.userDao().selectUser(username)
             if (existingUser != null) {
                 registerStatus.postValue("Username already exists!")

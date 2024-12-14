@@ -5,9 +5,15 @@ import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
 import com.example.biasaaja_companyprofile.model.UserDatabase
+import com.example.biasaaja_companyprofile.model.CompanyProfileDatabase
 
-fun createNotificationChannel(context: Context, importance: Int,
-                              showBadge: Boolean, name: String, description: String) {
+fun createNotificationChannel(
+    context: Context,
+    importance: Int,
+    showBadge: Boolean,
+    name: String,
+    description: String
+) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
         val channelId = "${context.packageName}-$name"
         val channel = NotificationChannel(channelId, name, importance)
@@ -17,14 +23,13 @@ fun createNotificationChannel(context: Context, importance: Int,
         val notificationManager =
             context.getSystemService(NotificationManager::class.java)
         notificationManager.createNotificationChannel(channel)
-
     }
 }
 
-//Database
-val DB_NAME = "companyprofile"
+// Database names
+const val DB_NAME = "companyprofile"
 
-fun buildDb(context: Context): UserDatabase {
-    val db = UserDatabase.buildDatabase(context)
-    return db
+
+fun buildCompanyProfileDb(context: Context): CompanyProfileDatabase {
+    return CompanyProfileDatabase.buildDatabase(context)
 }

@@ -106,6 +106,10 @@ class MainActivity : AppCompatActivity() {
         when (menuItem.itemId) {
             R.id.itemApply -> {
                 // Apply Team
+                val action =
+                    HomeFragmentDirections.actionHomeToApplyTeamFragment(sessionManager.getUsername() ?: "")
+
+                navController.navigate(action)
             }
             R.id.itemSignOut -> {
                 // Clear session and navigate to login
