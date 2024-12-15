@@ -67,14 +67,15 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     // Function to get the game name from the team ID
-    fun getGameNameByTeamId(teamId: Int): String {
-        val games = gamesLD.value ?: return "Unknown Game"
-        val game = games.find { it.id == teamId }
+    fun getGameNameByGameId(gameId: Int): String {
+        val games = gamesLD.value ?: return "No Game"
+        val game = games.find { it.id == gameId }
         if (game == null) {
-            Log.e("GameViewModel", "Game not found for teamId: $teamId")
+            Log.e("GameViewModel", "Game not found for gameId: $gameId")
         }
         return game?.name ?: "Unknown Game"
     }
+
 
 
 }

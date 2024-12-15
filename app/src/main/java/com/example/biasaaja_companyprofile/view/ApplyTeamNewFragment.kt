@@ -25,6 +25,7 @@ class ApplyTeamNewFragment : Fragment(), StoreApplyClickListener {
     private lateinit var teamViewModel: TeamViewModel
 
     private var username: String? = null
+    private var teamIdList: List<Int> = emptyList() // List to store team IDs
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -88,6 +89,8 @@ class ApplyTeamNewFragment : Fragment(), StoreApplyClickListener {
 
         teamViewModel.filteredTeamsLD.observe(viewLifecycleOwner, { filteredTeams ->
             val teamNames = filteredTeams.map { it.name }
+            teamIdList = filteredTeams.map { it.id ?: 999 } // Extract team IDs and save them
+
             Log.d("ApplyTeamNewFragment", "Filtered Teams Size: ${teamNames.size}")
             Log.d("ApplyTeamNewFragment", "Filtered Teams Data: $teamNames")
 
@@ -98,17 +101,8 @@ class ApplyTeamNewFragment : Fragment(), StoreApplyClickListener {
             binding.spnTeam.setSelection(0) // Default to first selection
         })
 
-
         // Load games data
         gameViewModel.refresh()
-
-        // Button listener for submitting the application
-//        binding.btnSubmit.setOnClickListener {
-//            Log.d("ApplyTeamNewFragment", "Submit button clicked")
-//            Toast.makeText(requireContext(), "Submit button clicked", Toast.LENGTH_SHORT).show()
-//            onStoreApplyClick(it)
-//        }
-
     }
 
     override fun onStoreApplyClick(v: View) {
@@ -120,13 +114,16 @@ class ApplyTeamNewFragment : Fragment(), StoreApplyClickListener {
 
         // Get selected team position
         val selectedTeamPosition = binding.spnTeam.selectedItemPosition
-        if (selectedTeamPosition == -1) {
-            Toast.makeText(v.context, "Please select a team", Toast.LENGTH_LONG).show()
+        if (selectedTeamPosition == -1 || teamIdList.isEmpty()) {
+            Toast.makeText(v.context, "Please select a valid team", Toast.LENGTH_LONG).show()
             return
         }
 
+        // Get the selected team ID
+        val selectedTeamId = teamIdList[selectedTeamPosition]
+
         // Get reason text
-        val reason = binding.txtReason.text.toString().trim()
+        val reason = binding.txtReason.text.toString()
         if (reason.isEmpty()) {
             Toast.makeText(v.context, "Please provide a reason", Toast.LENGTH_LONG).show()
             return
@@ -135,7 +132,7 @@ class ApplyTeamNewFragment : Fragment(), StoreApplyClickListener {
         // Create Apply object
         val apply = Apply(
             username = username,
-            team = selectedTeamPosition, // Replace with selected team object ID if available
+            team = selectedTeamId, // Use the selected team ID
             reason = reason,
             status = "Waiting"
         )

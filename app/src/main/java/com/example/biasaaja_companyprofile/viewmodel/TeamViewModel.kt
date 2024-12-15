@@ -42,4 +42,13 @@ class TeamViewModel : ViewModel() {
         Log.d("TeamViewModel", "Filtered teams: ${filteredTeamsLD.value}")
     }
 
+    fun getGameNameByTeamId(teamId: Int) : String {
+        val teams = teamsLD.value ?: return "No Team"
+        val team = teams.find { it.id == teamId }
+        if (team == null) {
+            Log.e("TeamViewModel", "Team not found for teamId: $teamId")
+        }
+        return team?.game?.name ?: "Unknown Game"
+    }
+
 }

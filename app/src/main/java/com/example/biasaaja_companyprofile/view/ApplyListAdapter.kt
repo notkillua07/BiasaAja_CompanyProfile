@@ -1,5 +1,6 @@
 package com.example.biasaaja_companyprofile.view
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,8 +10,9 @@ import com.example.biasaaja_companyprofile.databinding.ApplyListItemBinding
 import com.example.biasaaja_companyprofile.databinding.FragmentApplyTeamBinding
 import com.example.biasaaja_companyprofile.model.Apply
 import com.example.biasaaja_companyprofile.viewmodel.GameViewModel
+import com.example.biasaaja_companyprofile.viewmodel.TeamViewModel
 
-class ApplyListAdapter(val applyList: ArrayList<Apply>, private val gameViewModel: GameViewModel) :
+class ApplyListAdapter(val applyList: ArrayList<Apply>, private val teamViewModel: TeamViewModel) :
     RecyclerView.Adapter<ApplyListAdapter.ApplyViewHolder>() {
 
     class ApplyViewHolder(var binding: ApplyListItemBinding) : RecyclerView.ViewHolder(binding.root)
@@ -21,13 +23,10 @@ class ApplyListAdapter(val applyList: ArrayList<Apply>, private val gameViewMode
     }
 
     override fun onBindViewHolder(holder: ApplyViewHolder, position: Int) {
-        val apply = applyList[position]
-        holder.binding.apply = apply  // Bind the Apply object
-        holder.binding.gameViewModel = gameViewModel  // Bind the GameViewModel
-        holder.binding.executePendingBindings()  // Ensure immediate binding
+        holder.binding.apply = applyList[position]  // Bind the Apply object
+        holder.binding.teamViewModel = teamViewModel  // Bind the GameViewModel
+        holder.binding.executePendingBindings()
     }
-
-
 
     override fun getItemCount(): Int {
         return applyList.size

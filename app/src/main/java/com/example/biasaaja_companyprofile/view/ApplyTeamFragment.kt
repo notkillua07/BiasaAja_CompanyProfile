@@ -15,13 +15,14 @@ import com.example.biasaaja_companyprofile.viewmodel.ApplyTeamViewModel
 import com.example.biasaaja_companyprofile.model.Apply
 import com.example.biasaaja_companyprofile.model.Game
 import com.example.biasaaja_companyprofile.viewmodel.GameViewModel
+import com.example.biasaaja_companyprofile.viewmodel.TeamViewModel
 
 class ApplyTeamFragment : Fragment() {
 
     private lateinit var binding: FragmentApplyTeamBinding
     private lateinit var viewModel: ApplyTeamViewModel
-    private lateinit var gameViewModel: GameViewModel
-    private val applyListAdapter by lazy { ApplyListAdapter(arrayListOf(), gameViewModel) }
+    private lateinit var teamViewModel: TeamViewModel
+    private val applyListAdapter by lazy { ApplyListAdapter(arrayListOf(), teamViewModel) }
     private var username: String? = null
 
     override fun onCreateView(
@@ -38,8 +39,7 @@ class ApplyTeamFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(ApplyTeamViewModel::class.java)
         viewModel.refresh()
 
-        gameViewModel = ViewModelProvider(this).get(GameViewModel::class.java)
-        gameViewModel.refresh()
+        teamViewModel = ViewModelProvider(this).get(TeamViewModel::class.java)
 
         arguments?.let {
             username = ApplyTeamFragmentArgs.fromBundle(it).username

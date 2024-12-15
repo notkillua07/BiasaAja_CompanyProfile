@@ -9,8 +9,8 @@
             type="com.example.biasaaja_companyprofile.model.Apply" />
 
         <variable
-            name="gameViewModel"
-            type="com.example.biasaaja_companyprofile.viewmodel.GameViewModel" />
+            name="teamViewModel"
+            type="com.example.biasaaja_companyprofile.viewmodel.TeamViewModel" />
 
     </data>
 
@@ -42,7 +42,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="16dp"
-                    android:text="@{gameViewModel.getGameNameByTeamId(apply.team)}"
+                    android:text="@{teamViewModel.getGameNameByTeamId(apply.team)}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
