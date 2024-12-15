@@ -35,15 +35,15 @@ class ApplyTeamFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        viewModel = ViewModelProvider(this).get(ApplyTeamViewModel::class.java)
-        viewModel.refresh()
-
-        teamViewModel = ViewModelProvider(this).get(TeamViewModel::class.java)
-
         arguments?.let {
             username = ApplyTeamFragmentArgs.fromBundle(it).username
         }
+
+        viewModel = ViewModelProvider(this).get(ApplyTeamViewModel::class.java)
+        viewModel.refresh(username ?: "")
+
+        teamViewModel = ViewModelProvider(this).get(TeamViewModel::class.java)
+
 
         // Set up RecyclerView
         binding.recView.layoutManager = LinearLayoutManager(context)
@@ -60,7 +60,7 @@ class ApplyTeamFragment : Fragment() {
 
         // Swipe Refresh
         binding.refreshLayout.setOnRefreshListener {
-            viewModel.refresh()
+            viewModel.refresh(username ?: "")
         }
     }
 

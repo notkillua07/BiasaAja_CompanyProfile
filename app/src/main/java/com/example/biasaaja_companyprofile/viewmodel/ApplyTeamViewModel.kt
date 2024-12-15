@@ -27,18 +27,15 @@ class ApplyTeamViewModel(application: Application) : AndroidViewModel(applicatio
     override val coroutineContext: CoroutineContext
         get() = job + Dispatchers.IO
 
-    init {
-        refresh()
-    }
 
     // Refresh the data
-    fun refresh() {
+    fun refresh(username: String) {
         loadingLD.value = true
         applyLoadErrorLD.value = false
         launch {
             val db = CompanyProfileDatabase.buildDatabase(getApplication())
             try {
-                applyLD.postValue(db.applyDao().selectAllApply())
+                applyLD.postValue(db.applyDao().selectApply(username))
                 loadingLD.postValue(false)
             } catch (e: Exception) {
                 applyLoadErrorLD.postValue(true)
