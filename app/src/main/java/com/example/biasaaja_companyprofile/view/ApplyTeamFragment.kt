@@ -1,6 +1,7 @@
 package com.example.biasaaja_companyprofile.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,9 +20,9 @@ class ApplyTeamFragment : Fragment() {
 
     private lateinit var binding: FragmentApplyTeamBinding
     private lateinit var viewModel: ApplyTeamViewModel
-    private val applyListAdapter = ApplyListAdapter(arrayListOf()) { apply ->
-        navigateToApplyTeamNewFragment(apply)
-    }
+    private lateinit var gameViewModel: GameViewModel
+    private val applyListAdapter by lazy { ApplyListAdapter(arrayListOf(), gameViewModel) }
+    private var username: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,7 +36,14 @@ class ApplyTeamFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = ViewModelProvider(this).get(ApplyTeamViewModel::class.java)
+        viewModel.refresh()
 
+        gameViewModel = ViewModelProvider(this).get(GameViewModel::class.java)
+        gameViewModel.refresh()
+
+        arguments?.let {
+            username = ApplyTeamFragmentArgs.fromBundle(it).username
+        }
 
         // Set up RecyclerView
         binding.recView.layoutManager = LinearLayoutManager(context)
@@ -46,7 +54,7 @@ class ApplyTeamFragment : Fragment() {
 
         // Button to navigate
         binding.btnAdd.setOnClickListener {
-            val action = ApplyTeamFragmentDirections.actionApplyTeamToApplyTeamNewFragment("")
+            val action = ApplyTeamFragmentDirections.actionApplyTeamToApplyTeamNewFragment(username ?: "")
             Navigation.findNavController(it).navigate(action)
         }
 
@@ -57,10 +65,10 @@ class ApplyTeamFragment : Fragment() {
     }
 
     private fun observeViewModel() {
-        // Observe the list of apply data
-        viewModel.applyLD.observe(viewLifecycleOwner, Observer { applyList ->
-            applyListAdapter.updateApplyList(applyList)
-            if (applyList.isEmpty()) {
+        viewModel.applyLD.observe(viewLifecycleOwner, Observer {
+            applyListAdapter.updateApplyList(it)
+            binding.refreshLayout.isRefreshing = false  // Stop the refresh indicator
+            if (it.isEmpty()) {
                 binding.recView.visibility = View.GONE
                 binding.txtError.visibility = View.VISIBLE
                 binding.txtError.text = "No applications available"
@@ -70,19 +78,14 @@ class ApplyTeamFragment : Fragment() {
             }
         })
 
-        // Observe loading state to manage progress bar visibility
         viewModel.loadingLD.observe(viewLifecycleOwner, Observer { isLoading ->
             binding.progressLoad.visibility = if (isLoading) View.VISIBLE else View.GONE
         })
 
-        // Observe error state to show/hide error text
         viewModel.applyLoadErrorLD.observe(viewLifecycleOwner, Observer { hasError ->
             binding.txtError.visibility = if (hasError) View.VISIBLE else View.GONE
         })
     }
 
-    private fun navigateToApplyTeamNewFragment(apply: Apply) {
-        val action = ApplyTeamFragmentDirections.actionApplyTeamToApplyTeamNewFragment(apply.username)
-        view?.let { Navigation.findNavController(it).navigate(action) }
-    }
+
 }

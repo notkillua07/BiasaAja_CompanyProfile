@@ -65,4 +65,16 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         super.onCleared()
         queue?.cancelAll(TAG)
     }
+
+    // Function to get the game name from the team ID
+    fun getGameNameByTeamId(teamId: Int): String {
+        val games = gamesLD.value ?: return "Unknown Game"
+        val game = games.find { it.id == teamId }
+        if (game == null) {
+            Log.e("GameViewModel", "Game not found for teamId: $teamId")
+        }
+        return game?.name ?: "Unknown Game"
+    }
+
+
 }

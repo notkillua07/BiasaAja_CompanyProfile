@@ -8,7 +8,7 @@ object TeamDataProvider {
     val teams = arrayListOf(
         Team(
             id = 1,
-            name = "Team A",
+            name = "Team ML A",
             game = Game(
                 1,
                 "Mobile Legends",
@@ -22,7 +22,7 @@ object TeamDataProvider {
         ),
         Team(
             id = 2,
-            name = "Team B",
+            name = "Team ML B",
             game = Game(
                 1,
                 "Mobile Legends",
@@ -37,7 +37,7 @@ object TeamDataProvider {
         ),
         Team(
             id = 3,
-            name = "Team A",
+            name = "Team V A",
             game = Game(
                 2,
                 "Valorant",
@@ -54,7 +54,7 @@ object TeamDataProvider {
         ),
         Team(
             id = 4,
-            name = "Team B",
+            name = "Team V B",
             game = Game(
                 2,
                 "Valorant",

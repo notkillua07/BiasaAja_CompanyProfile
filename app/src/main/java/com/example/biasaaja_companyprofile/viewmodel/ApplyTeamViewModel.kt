@@ -27,6 +27,10 @@ class ApplyTeamViewModel(application: Application) : AndroidViewModel(applicatio
     override val coroutineContext: CoroutineContext
         get() = job + Dispatchers.IO
 
+    init {
+        refresh()
+    }
+
     // Refresh the data
     fun refresh() {
         loadingLD.value = true
