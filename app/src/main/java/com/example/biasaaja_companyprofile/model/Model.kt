@@ -4,50 +4,67 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.io.Serializable
-
+@Entity(tableName = "games")
 data class Game(
-    val id:Int?,
-    val name:String?,
-    val imageUrl:String?,
-    val description:String?
-):Serializable
+    val id:Int = 0,
+    var name:String?,
+    var imageUrl:String?,
+    var description:String?
+):Serializable{
+    @PrimaryKey(autoGenerate = true)
+    var uuid:Int=0
+}
 
+@Entity(tableName = "achievements")
 data class Achievement(
-    val id:Int?,
-    val name:String?,
-    val game_name:String?,
-    val team_name:String?,
-    val year:Int?
-):Serializable
+    val id:Int = 0,
+    var name:String?,
+    var game_name:String?,
+    var team_name:String?,
+    var year:Int?
+):Serializable{
+    @PrimaryKey(autoGenerate = true)
+    var uuid:Int=0
+}
 
+@Entity(tableName = "schedules")
 data class Schedule(
-    val id:Int?,
-    val name:String?,
-    val imageUrl:String?,
-    val date:String?,
-    val month:String?,
-    val time:String?,
-    val location:String?,
-    val description:String?,
-    val game_name:String?,
-    val team_name:String?,
-):Serializable
+    val id:Int = 0,
+    var name:String?,
+    var imageUrl:String?,
+    var date:String?,
+    var month:String?,
+    var time:String?,
+    var location:String?,
+    var description:String?,
+    var game_name:String?,
+    var team_name:String?,
+):Serializable{
+    @PrimaryKey(autoGenerate = true)
+    var uuid:Int=0
+}
 
+@Entity(tableName = "teams")
 data class Team(
-    val id:Int?,
-    val name:String?,
-    val game:Game?,
-    val members:ArrayList<Member>?
-):Serializable
+    val id:Int = 0,
+    var name:String?,
+    var game_id:Int?
+):Serializable{
+    @PrimaryKey(autoGenerate = true)
+    var uuid:Int=0
+}
 
+@Entity(tableName = "members")
 data class Member(
-    val id:Int?,
-    val name:String?,
-    val role:String?,
-//    val bod:String?,
-//    val phone:String?,
-    val imageUrl:String?
-):Serializable
+    val id:Int = 0,
+    var name:String?,
+    var team_id:Int?,
+    var role:String?,
+    var imageUrl:String?
+):Serializable{
+    @PrimaryKey(autoGenerate = true)
+    var uuid:Int=0
+}
 
 @Entity(tableName = "users")
 data class User(
@@ -59,9 +76,8 @@ data class User(
 
 @Entity(tableName = "applies", primaryKeys = ["username", "team"])
 data class Apply(
-    val username: String,
-    val team: Int,
+    var username: String,
+    var team: Int,
     var reason: String,
     var status: String
 ): Serializable
-

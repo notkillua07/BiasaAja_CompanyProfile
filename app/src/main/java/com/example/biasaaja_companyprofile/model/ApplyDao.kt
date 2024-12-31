@@ -14,7 +14,7 @@ interface ApplyDao {
     @Query("SELECT * FROM applies")
     fun selectAllApply(): List<Apply>
 
-    @Query("SELECT * FROM applies WHERE username = :u")
+    @Query("SELECT * FROM applies WHERE username=:u")
     fun selectApply(u: String): List<Apply>
 
     @Update

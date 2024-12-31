@@ -6,7 +6,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.biasaaja_companyprofile.model.Team
-import com.example.biasaaja_companyprofile.util.TeamDataProvider
 
 class TeamViewModel : ViewModel() {
 
@@ -20,7 +19,7 @@ class TeamViewModel : ViewModel() {
 
     private fun fetchTeams() {
         // Load all teams initially
-        teamsLD.value = TeamDataProvider.teams
+//        teamsLD.value = TeamDataProvider.teams
     }
 
     // To update selected game ID and trigger filtering
@@ -33,7 +32,8 @@ class TeamViewModel : ViewModel() {
     fun filterTeamsByGame(gameId: Int?) {
         val allTeams = teamsLD.value ?: arrayListOf()
         filteredTeamsLD.value = if (gameId != null) {
-            allTeams.filter { it.game?.id == gameId } // Ensure game ID is properly compared
+            allTeams
+            //allTeams.filter { it.game?.id == gameId } // Ensure game ID is properly compared
         } else {
             allTeams // Return all teams if no game is selected
         }
@@ -48,7 +48,8 @@ class TeamViewModel : ViewModel() {
         if (team == null) {
             Log.e("TeamViewModel", "Team not found for teamId: $teamId")
         }
-        return team?.game?.name ?: "Unknown Game"
+//        return team?.game?.name ?: "Unknown Game"
+        return "Unknown Game"
     }
 
 }

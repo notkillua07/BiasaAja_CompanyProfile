@@ -15,7 +15,7 @@ interface UserDao {
     @Query("SELECT * FROM users")
     fun selectAllUser(): List<User>
 
-    @Query("SELECT * FROM users WHERE username= :username")
+    @Query("SELECT * FROM users WHERE username=:username")
     fun selectUser(username:String): User
 
     @Delete

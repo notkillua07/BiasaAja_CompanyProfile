@@ -11,8 +11,17 @@ import com.android.volley.toolbox.Volley
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.example.biasaaja_companyprofile.model.Game
+import com.example.biasaaja_companyprofile.model.User
+import com.example.studentproject.util.buildCompanyProfileDb
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlin.math.log
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
-class GameViewModel(application: Application) : AndroidViewModel(application) {
+class GameViewModel(application: Application) : AndroidViewModel(application), CoroutineScope {
+    private val job = Job() // Coroutine job for background tasks
     val gamesLD = MutableLiveData<ArrayList<Game>>()
     val allGamesLD = MutableLiveData<ArrayList<String>>()  // List of game names
     val selectedGameIdLD = MutableLiveData<Int?>()  // Holds the selected game ID
@@ -66,6 +75,14 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         queue?.cancelAll(TAG)
     }
 
+    fun addGame(game: Game){
+        launch{
+            val db = buildCompanyProfileDb(getApplication())
+            db.gameDao().insertAll(game)
+            Log.e("GameViewModel","Game Inserted!")
+        }
+    }
+
     // Function to get the game name from the team ID
     fun getGameNameByGameId(gameId: Int): String {
         val games = gamesLD.value ?: return "No Game"
@@ -76,6 +93,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         return game?.name ?: "Unknown Game"
     }
 
-
+    override val coroutineContext: CoroutineContext
+        get() = job + Dispatchers.IO // Execute coroutines in IO dispatcher
 
 }

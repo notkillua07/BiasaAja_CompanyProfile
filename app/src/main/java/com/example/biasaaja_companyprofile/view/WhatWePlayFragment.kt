@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.biasaaja_companyprofile.databinding.FragmentWhatWePlayBinding
+import com.example.biasaaja_companyprofile.model.Game
 import com.example.biasaaja_companyprofile.viewmodel.GameViewModel
 
 /**
@@ -32,6 +33,7 @@ class WhatWePlayFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
 
         viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
         viewModel.refresh()

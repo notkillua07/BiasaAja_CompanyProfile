@@ -17,7 +17,9 @@ import android.content.pm.PackageManager
 import android.util.Log
 import android.view.MenuItem
 import androidx.core.view.GravityCompat
+import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import androidx.viewpager2.widget.ViewPager2
 import com.example.biasaaja_companyprofile.util.SessionManager
 import com.example.studentproject.util.createNotificationChannel
 
@@ -25,6 +27,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     private lateinit var sessionManager: SessionManager
+    val fragments: ArrayList<Fragment> = ArrayList()
     init {
         instance = this
     }
@@ -69,6 +72,30 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
+        fragments.add(WhatWePlayFragment())
+        fragments.add(ScheduleFragment())
+        fragments.add(WhoWeAreFragment())
+
+        binding.viewPager.adapter = PagerAdapter(this,fragments)
+        binding.viewPager.registerOnPageChangeCallback(object:ViewPager2.OnPageChangeCallback()
+        {
+            override fun onPageSelected(position: Int) {
+                binding.bottomNav.selectedItemId =
+                    binding.bottomNav.menu.getItem(position).itemId
+            }
+        })
+        binding.bottomNav.setOnItemSelectedListener {
+            binding.viewPager.currentItem = when(it.itemId) {
+                R.id.itemWePlay -> 0
+                R.id.itemSchedule -> 1
+                R.id.itemWho -> 2
+                else -> 0
+            }
+            true
+        }
+
+
         sessionManager = SessionManager(this)
 
         if (!sessionManager.isLoggedIn()) {
@@ -77,20 +104,21 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
 
-        navController = (supportFragmentManager.findFragmentById(R.id.hostFragment) as NavHostFragment).navController
-        NavigationUI.setupActionBarWithNavController(
-            this, navController,
-            binding.drawerLayout
-        )
 
-        NavigationUI.setupWithNavController(binding.navView, navController)
-        binding.bottomNav.setupWithNavController(navController)
+//        navController = (supportFragmentManager.findFragmentById(R.id.hostFragment) as NavHostFragment).navController
+//        NavigationUI.setupActionBarWithNavController(
+//            this, navController,
+//            binding.drawerLayout
+//        )
+//
+//        NavigationUI.setupWithNavController(binding.navView, navController)
+//        binding.bottomNav.setupWithNavController(navController)
 
         updateWelcomeMessage()
 
-        binding.navView.setNavigationItemSelectedListener { menuItem ->
-            handleMenuClick(menuItem)
-        }
+//        binding.navView.setNavigationItemSelectedListener { menuItem ->
+//            handleMenuClick(menuItem)
+//        }
 
     }
 
