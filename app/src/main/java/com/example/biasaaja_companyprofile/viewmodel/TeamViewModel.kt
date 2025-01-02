@@ -6,12 +6,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.biasaaja_companyprofile.model.Team
+import com.example.biasaaja_companyprofile.model.Team2
+import com.example.biasaaja_companyprofile.util.TeamDataProvider
 
 class TeamViewModel : ViewModel() {
 
-    val teamsLD = MutableLiveData<ArrayList<Team>>() // All teams
+    val teamsLD = MutableLiveData<ArrayList<Team2>>() // All teams
     val selectedGameIdLD = MutableLiveData<Int?>()   // Selected game ID (Nullable to indicate no selection)
-    val filteredTeamsLD = MutableLiveData<List<Team>>() // Filtered teams based on game ID
+    val filteredTeamsLD = MutableLiveData<List<Team2>>() // Filtered teams based on game ID
 
     init {
         fetchTeams()
@@ -19,7 +21,7 @@ class TeamViewModel : ViewModel() {
 
     private fun fetchTeams() {
         // Load all teams initially
-//        teamsLD.value = TeamDataProvider.teams
+        teamsLD.value = TeamDataProvider.teams
     }
 
     // To update selected game ID and trigger filtering
@@ -32,8 +34,8 @@ class TeamViewModel : ViewModel() {
     fun filterTeamsByGame(gameId: Int?) {
         val allTeams = teamsLD.value ?: arrayListOf()
         filteredTeamsLD.value = if (gameId != null) {
-            allTeams
-            //allTeams.filter { it.game?.id == gameId } // Ensure game ID is properly compared
+//            allTeams
+            allTeams.filter { it.game?.id == gameId } // Ensure game ID is properly compared
         } else {
             allTeams // Return all teams if no game is selected
         }
@@ -48,8 +50,8 @@ class TeamViewModel : ViewModel() {
         if (team == null) {
             Log.e("TeamViewModel", "Team not found for teamId: $teamId")
         }
-//        return team?.game?.name ?: "Unknown Game"
-        return "Unknown Game"
+        return team?.game?.name ?: "Unknown Game"
+//        return "Unknown Game"
     }
 
 }

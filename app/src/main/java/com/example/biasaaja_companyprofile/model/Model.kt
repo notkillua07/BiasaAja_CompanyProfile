@@ -81,3 +81,17 @@ data class Apply(
     var reason: String,
     var status: String
 ): Serializable
+
+data class Team2(
+    val id:Int = 0,
+    var name:String?,
+    var game:Game?,
+    var members:ArrayList<Member2>?
+):Serializable
+
+data class Member2(
+    val id:Int = 0,
+    var name:String?,
+    var role:String?,
+    var imageUrl:String?
+):Serializable

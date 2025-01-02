@@ -8,7 +8,7 @@ import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.studentproject.util.DB_NAME
 
-@Database(entities = arrayOf(User::class, Apply::class, Team::class, Schedule::class, Achievement::class, Member::class, Game::class), version = 4)
+@Database(entities = arrayOf(User::class, Apply::class, Team::class, Schedule::class, Achievement::class, Member::class, Game::class), version = 3)
 abstract class CompanyProfileDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
     abstract fun applyDao(): ApplyDao

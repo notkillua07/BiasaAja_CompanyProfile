@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.biasaaja_companyprofile.model.Apply
 import com.example.biasaaja_companyprofile.model.CompanyProfileDatabase
 import com.example.biasaaja_companyprofile.model.Team
+import com.example.biasaaja_companyprofile.model.Team2
 import com.example.biasaaja_companyprofile.model.User
 import com.example.studentproject.util.buildCompanyProfileDb
 import kotlinx.coroutines.CoroutineScope
@@ -20,7 +21,7 @@ class ApplyTeamViewModel(application: Application) : AndroidViewModel(applicatio
     val applyLoadErrorLD = MutableLiveData<Boolean>()
     val loadingLD = MutableLiveData<Boolean>()
     val selectedGameIdLD = MutableLiveData<Int>()
-    val teamLD = MutableLiveData<Team>()
+    val teamLD = MutableLiveData<Team2>()
 
     private var job = Job()
 

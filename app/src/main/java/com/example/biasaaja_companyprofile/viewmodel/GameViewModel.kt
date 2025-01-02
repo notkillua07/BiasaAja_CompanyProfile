@@ -40,29 +40,35 @@ class GameViewModel(application: Application) : AndroidViewModel(application), C
     fun refresh() {
         gamesLoadErrorLD.value = false
         loadingLD.value = true
-
-        queue = Volley.newRequestQueue(getApplication())
-        val url = "https://www.jsonkeeper.com/b/UF73"
-
-        val stringRequest = StringRequest(Request.Method.GET, url, {
-            val type = object : TypeToken<List<Game>>() {}.type
-            val result = Gson().fromJson<List<Game>>(it, type)
-
-            val gameNames = result.map { it.name ?: "Unknown" }
-            allGamesLD.value = ArrayList(gameNames)
-
-            gamesLD.value = ArrayList(result)
+        launch{
+            val db = buildCompanyProfileDb(getApplication())
+            gamesLD.value = ArrayList(db.gameDao().selectAllGame())
             loadingLD.value = false
+            Log.e("GameViewModel","Game Selected!")
+        }
 
-            Log.d("showvolley", result.toString())
-
-        }, {
-            gamesLoadErrorLD.value = true
-            loadingLD.value = false
-        })
-
-        stringRequest.tag = TAG
-        queue?.add(stringRequest)
+//        queue = Volley.newRequestQueue(getApplication())
+//        val url = "https://www.jsonkeeper.com/b/UF73"
+//
+//        val stringRequest = StringRequest(Request.Method.GET, url, {
+//            val type = object : TypeToken<List<Game>>() {}.type
+//            val result = Gson().fromJson<List<Game>>(it, type)
+//
+//            val gameNames = result.map { it.name ?: "Unknown" }
+//            allGamesLD.value = ArrayList(gameNames)
+//
+//            gamesLD.value = ArrayList(result)
+//            loadingLD.value = false
+//
+//            Log.d("showvolley", result.toString())
+//
+//        }, {
+//            gamesLoadErrorLD.value = true
+//            loadingLD.value = false
+//        })
+//
+//        stringRequest.tag = TAG
+//        queue?.add(stringRequest)
     }
 
     // Function to set the selected game ID and trigger necessary actions
@@ -85,10 +91,10 @@ class GameViewModel(application: Application) : AndroidViewModel(application), C
 
     // Function to get the game name from the team ID
     fun getGameNameByGameId(gameId: Int): String {
-        val games = gamesLD.value ?: return "No Game"
-        val game = games.find { it.id == gameId }
-        if (game == null) {
-            Log.e("GameViewModel", "Game not found for gameId: $gameId")
+        var game: Game? = null
+        launch{
+            val db = buildCompanyProfileDb(getApplication())
+            game = db.gameDao().selectGameId(gameId.toString())
         }
         return game?.name ?: "Unknown Game"
     }

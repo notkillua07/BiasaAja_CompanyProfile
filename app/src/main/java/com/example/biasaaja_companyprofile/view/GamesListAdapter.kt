@@ -47,15 +47,6 @@ class GamesListAdapter(val gamesList: ArrayList<Game>) :
             holder.binding.txtName.text = gamesList[position].name
             holder.binding.txtDescription.text = gamesList[position].description
 
-//            val id = studentList[position].id
-//            val name = studentList[position].name
-//            val bod = studentList[position].bod
-//            val phone = studentList[position].phone
-//            holder.binding.btnTeams.setOnClickListener {
-//                val action = StudentListFragmentDirections.actionStudentDetail(id.toString(), name.toString(), bod.toString(), phone.toString())
-//                Navigation.findNavController(it).navigate(action)
-//            }
-
             holder.binding.btnAchievements.setOnClickListener {
                 val action = WhatWePlayFragmentDirections.actionWhatWePlayToAchievementFragment(
                     gamesList[position].name.toString(), gamesList[position].imageUrl.toString())

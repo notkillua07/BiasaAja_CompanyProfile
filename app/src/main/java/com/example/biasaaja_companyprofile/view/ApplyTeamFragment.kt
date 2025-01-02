@@ -1,5 +1,6 @@
 package com.example.biasaaja_companyprofile.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -33,6 +34,11 @@ class ApplyTeamFragment : Fragment() {
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.refresh(username ?: "")
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         arguments?.let {
@@ -54,8 +60,14 @@ class ApplyTeamFragment : Fragment() {
 
         // Button to navigate
         binding.btnAdd.setOnClickListener {
-            val action = ApplyTeamFragmentDirections.actionApplyTeamToApplyTeamNewFragment(username ?: "")
-            Navigation.findNavController(it).navigate(action)
+//            val action = ApplyTeamFragmentDirections.actionApplyTeamToApplyTeamNewFragment(username ?: "")
+//            Navigation.findNavController(it).navigate(action)
+            activity?.let{
+                val intent = Intent(it, Helper2Activity::class.java)
+                intent.putExtra("username", username?:"")
+                startActivity(intent)
+            }
+
         }
 
         // Swipe Refresh

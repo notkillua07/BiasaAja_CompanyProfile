@@ -1,5 +1,6 @@
 package com.example.biasaaja_companyprofile.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.example.biasaaja_companyprofile.databinding.FragmentApplyTeamNewBinding
 import com.example.biasaaja_companyprofile.model.Apply
+import com.example.biasaaja_companyprofile.util.SessionManager
 import com.example.biasaaja_companyprofile.viewmodel.ApplyTeamViewModel
 import com.example.biasaaja_companyprofile.viewmodel.GameViewModel
 import com.example.biasaaja_companyprofile.viewmodel.TeamViewModel
@@ -23,6 +25,7 @@ class ApplyTeamNewFragment : Fragment(), StoreApplyClickListener {
     private lateinit var binding: FragmentApplyTeamNewBinding
     private lateinit var gameViewModel: GameViewModel
     private lateinit var teamViewModel: TeamViewModel
+    private lateinit var sessionManager: SessionManager
 
     private var username: String? = null
     private var teamIdList: List<Int> = emptyList() // List to store team IDs
@@ -39,6 +42,7 @@ class ApplyTeamNewFragment : Fragment(), StoreApplyClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         binding.storeListener = this
+        activity?.let { sessionManager = SessionManager(it) }
 
         // Initialize ViewModels
         viewModel = ViewModelProvider(this).get(ApplyTeamViewModel::class.java)
@@ -106,7 +110,8 @@ class ApplyTeamNewFragment : Fragment(), StoreApplyClickListener {
     }
 
     override fun onStoreApplyClick(v: View) {
-        val username = this.username
+        username = sessionManager.getUsername()
+
         if (username.isNullOrEmpty()) {
             Toast.makeText(v.context, "Username is missing", Toast.LENGTH_LONG).show()
             return
@@ -131,7 +136,7 @@ class ApplyTeamNewFragment : Fragment(), StoreApplyClickListener {
 
         // Create Apply object
         val apply = Apply(
-            username = username,
+            username = username!!,
             team = selectedTeamId, // Use the selected team ID
             reason = reason,
             status = "Waiting"
@@ -145,6 +150,10 @@ class ApplyTeamNewFragment : Fragment(), StoreApplyClickListener {
         Log.d("ApplyTeamNewFragment", "Application Submitted: $apply")
 
         // Navigate back
-        Navigation.findNavController(v).popBackStack()
+        activity?.let{
+            val intent = Intent(it, HelperActivity::class.java)
+            startActivity(intent)
+            it.finish()
+        }
     }
 }
